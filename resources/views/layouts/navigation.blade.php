@@ -2,7 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('articles.index') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600 dark:text-gray-255" />
@@ -10,11 +9,9 @@
                 </div>
             </div>
 
-            <!-- Right Side: Authentication Links -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 
                 @guest
-                    <!-- Если гость: показать Login и Register -->
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
@@ -26,7 +23,6 @@
                 @endguest
 
                 @auth
-                    <!-- Если авторизован: Settings Dropdown -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -49,15 +45,12 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <!-- Profile -->
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                            <!-- Dashboard -->
                             <x-dropdown-link :href="route('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
-                            <!-- Logout -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
@@ -71,7 +64,6 @@
 
             </div>
 
-            <!-- Hamburger for mobile -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400
@@ -90,7 +82,6 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         @guest
             <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">

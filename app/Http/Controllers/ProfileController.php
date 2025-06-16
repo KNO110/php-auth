@@ -11,13 +11,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /** Защищаем всё контроллером ‘auth’ */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /** Показ формы профиля */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -25,12 +23,10 @@ class ProfileController extends Controller
         ]);
     }
 
-    /** Обновление профиля */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
 
-        // если email изменился — сброс верификации
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -40,7 +36,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /** Удаление аккаунта */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

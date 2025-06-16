@@ -9,7 +9,6 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        // Защищаем все методы, кроме index и show
         $this->middleware('auth')->except(['index', 'show']);
     }
 
